@@ -24,8 +24,6 @@ public class OrderListTest {
         var response = getResponseViaGet(ORDERS_HANDLE);
 
         checkForStatusCode(response, HTTP_OK);
-
         checkOrdersIdNotNull(response);
     }
-
 }

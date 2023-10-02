@@ -23,6 +23,42 @@ public class MethodFactory {
                 .baseUri(YANDEX_SCOOTER)
                 ;
     }
+
+    @Step ("checking the Status Code")
+    public static void checkForStatusCode(ValidatableResponse response, int status) {
+        response.statusCode(status)
+        ;
+    }
+    @Step ("checking creation with \"Ok\" in the response")
+    public static void checkCreatedWithOkTrue(ValidatableResponse response) {
+        response.assertThat()
+                .body("ok", is(true))
+        ;
+    }
+    @Step ("checking creation with not null \"track\" in the response")
+    public static void checkCreatedWithTrackNotNull(ValidatableResponse response) {
+        response.assertThat()
+                .body("track", notNullValue())
+        ;
+    }
+    @Step("checking the \"orders.id\" not null")
+    public static void checkOrdersIdNotNull(ValidatableResponse response) {
+        response.assertThat()
+                .body("orders[0].id", notNullValue())
+        ;
+    }
+    @Step("checking the \"id\" not null")
+    public static void checkLoggedInWithNotNullId(ValidatableResponse response) {
+        response
+                .assertThat()
+                .body("id", notNullValue());
+    }
+    public static int getCourierId(Credentials credentials) {
+        return loggedInCourier(credentials)
+                .extract()
+                .path("id")
+                ;
+    }
     @Step ("getting Response via GET Request")
     public static ValidatableResponse getResponseViaGet(String finalHandle) {
         return scope()
@@ -30,30 +66,12 @@ public class MethodFactory {
                 .then().log().all()
                 ;
     }
-    @Step ("checking the Status Code")
-    public static void checkForStatusCode(ValidatableResponse response, int status) {
-        response.statusCode(status)
-        ;
-    }
-    @Step("checking the orders.id not null")
-    public static void checkOrdersIdNotNull(ValidatableResponse response) {
-        response.assertThat()
-                .body("orders[0].id", notNullValue())
-        ;
-    }
     @Step("courier data generation")
     public static Courier genericCourier() {
         return new Courier("Bazz"+ RandomStringUtils.randomAlphanumeric(3,5),
                 RandomStringUtils.randomAlphanumeric(7,10), "Bazz");
     }
-    public static ValidatableResponse loginCourier(Credentials credentials) {
-        return scope()
-                .body(credentials)
-                .when()
-                .post(BASIC_HANDLE + COURIER_HANDLE + LOGIN_HANDLE)
-                .then().log().all()
-                ;
-    }
+    @Step("creating a new courier")
     public static ValidatableResponse createCourier(Courier courier) {
         return scope()
                 .body(courier)
@@ -62,39 +80,33 @@ public class MethodFactory {
                 .then().log().all()
                 ;
     }
-    public static void deleteCourier(Courier courier) {
+    @Step("login a courier")
+    public static ValidatableResponse loggedInCourier(Credentials credentials) {
+        return scope()
+                .body(credentials)
+                .when()
+                .post(BASIC_HANDLE + COURIER_HANDLE + LOGIN_HANDLE)
+                .then().log().all()
+                ;
+    }
+    @Step("login a courier")
+    public static ValidatableResponse deleteCourier(Courier courier) {
         int id = getCourierId(Credentials.from(courier));
         System.out.println(id);
-        scope()
+        return scope()
                 .body(Map.of("id", valueOf(id)))
                 .when()
                 .delete(BASIC_HANDLE + COURIER_HANDLE + "/" + id)
                 .then().log().all()
-                .statusCode(HTTP_OK)
-                .body("ok", is(true))
                 ;
     }
-    public static void assertCreatedSuccessfully(ValidatableResponse response) {
-        response.assertThat()
-                .statusCode(HTTP_CREATED)
-                .body("ok", is(true))
-                ;
-    }
-    public static void loggedInSuccessfully(Credentials credentials) {
-        int id = loginCourier(credentials)
-                .assertThat()
-                .statusCode(HTTP_OK)
-                .extract()
-                .path("id")
-                ;
-        assert id!=0;
-    }
-    public static int getCourierId(Credentials credentials) {
-        return loginCourier(credentials)
-                .assertThat()
-                .statusCode(HTTP_OK)
-                .extract()
-                .path("id")
+    @Step("create order")
+    public static ValidatableResponse createOrder(Object[] params) {
+        return scope()
+                .body(params)
+                .when()
+                .post(BASIC_HANDLE + ORDERS_HANDLE)
+                .then().log().all()
                 ;
     }
 }
