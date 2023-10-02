@@ -3,7 +3,6 @@ package Example;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
-import io.restassured.response.ValidatableResponse;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,21 +21,22 @@ public class CourierTest {
     @DisplayName("Check order list wdhgfgithout CourierId of /api/v1/orders")
     @Description("Basic test for /api/v1/orders")
     public void courier() {
-        var courier = genericCourier();
+        var courierData = genericCourier();
 
-        var response = createCourier(courier);
+        var courier = createCourier(courierData);
 
-        checkForStatusCode(response, HTTP_CREATED);
-        checkCreatedWithOkTrue(response);
+        checkForStatusCode(courier, HTTP_CREATED);
+        checkCreatedWithOkTrue(courier);
 
-        var credentials = Credentials.from(courier);
+        var credentialsData = Credentials.from(courierData);
 
-        loggedInCourier(credentials);
-        checkForStatusCode(response, HTTP_OK);
-        checkLoggedInWithNotNullId(response);
+        var credentials = loggedInCourier(credentialsData);
 
-        deleteCourier(courier);
-        checkForStatusCode(response, HTTP_OK);
-        checkCreatedWithOkTrue(response);
+        checkForStatusCode(credentials, HTTP_OK);
+        checkLoggedInWithNotNullId(credentials);
+
+        var courierDelete = deleteCourier(courierData);
+        checkForStatusCode(courierDelete, HTTP_OK);
+        checkCreatedWithOkTrue(courierDelete);
     }
 }

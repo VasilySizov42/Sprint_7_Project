@@ -21,9 +21,9 @@ public class OrderListTest {
     @Description("Basic test for /api/v1/orders")
     public void checkOrderListWithCourierIdNull() {
 
-        var response = getResponseViaGet(ORDERS_HANDLE);
+        var requestOrderList = getResponseViaGet(ORDERS_HANDLE);
 
-        checkForStatusCode(response, HTTP_OK);
-        checkOrdersIdNotNull(response);
+        checkForStatusCode(requestOrderList, HTTP_OK);
+        checkOrdersIdNotNull(requestOrderList);
     }
 }

@@ -11,8 +11,6 @@ import java.util.Map;
 import static Example.DataForTesting.*;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.valueOf;
-import static java.net.HttpURLConnection.HTTP_CREATED;
-import static java.net.HttpURLConnection.HTTP_OK;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.is;
 
@@ -21,42 +19,6 @@ public class MethodFactory {
         return  given().log().all()
                 .contentType(ContentType.JSON)
                 .baseUri(YANDEX_SCOOTER)
-                ;
-    }
-
-    @Step ("checking the Status Code")
-    public static void checkForStatusCode(ValidatableResponse response, int status) {
-        response.statusCode(status)
-        ;
-    }
-    @Step ("checking the \"Ok\" in the response")
-    public static void checkCreatedWithOkTrue(ValidatableResponse response) {
-        response.assertThat()
-                .body("ok", is(true))
-        ;
-    }
-    @Step ("checking the not null \"track\" in the response")
-    public static void checkCreatedWithTrackNotNull(ValidatableResponse response) {
-        response.assertThat()
-                .body("track", notNullValue())
-        ;
-    }
-    @Step("checking the not null \"orders.id\" in the response")
-    public static void checkOrdersIdNotNull(ValidatableResponse response) {
-        response.assertThat()
-                .body("orders[0].id", notNullValue())
-        ;
-    }
-    @Step("checking the \"id\" not null")
-    public static void checkLoggedInWithNotNullId(ValidatableResponse response) {
-        response
-                .assertThat()
-                .body("id", notNullValue());
-    }
-    public static int getCourierId(Credentials credentials) {
-        return loggedInCourier(credentials)
-                .extract()
-                .path("id")
                 ;
     }
     @Step ("getting Response via GET Request")
@@ -109,4 +71,41 @@ public class MethodFactory {
                 .then().log().all()
                 ;
     }
+
+    @Step ("checking the Status Code")
+    public static void checkForStatusCode(ValidatableResponse response, int status) {
+        response.assertThat()
+                .statusCode(status)
+        ;
+    }
+    @Step ("checking the \"Ok\" in the response is true")
+    public static void checkCreatedWithOkTrue(ValidatableResponse response) {
+        response.assertThat()
+                .body("ok", is(true))
+        ;
+    }
+    @Step ("checking the not null \"track\" in the response is not null")
+    public static void checkCreatedWithTrackNotNull(ValidatableResponse response) {
+        response.assertThat()
+                .body("track", notNullValue())
+        ;
+    }
+    @Step("checking the not null \"orders.id\" in the response is not null")
+    public static void checkOrdersIdNotNull(ValidatableResponse response) {
+        response.assertThat()
+                .body("orders[0].id", notNullValue())
+        ;
+    }
+    @Step("checking the \"id\" in the response is not null")
+    public static void checkLoggedInWithNotNullId(ValidatableResponse response) {
+        response.assertThat()
+                .body("id", notNullValue());
+    }
+    public static int getCourierId(Credentials credentials) {
+        return loggedInCourier(credentials)
+                .extract()
+                .path("id")
+                ;
+    }
+
 }

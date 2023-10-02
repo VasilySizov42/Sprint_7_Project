@@ -1,4 +1,7 @@
 package Example;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,12 +52,14 @@ public class CreateOrderTest {
                 BLACK_AND_GRAY_SCOOTER, UNDEFINED_COLOUR_SCOOTER,};
     }
     @Test
-    public void checkBlackScooterColourTest() {
+    @DisplayName("Check order list without CourierId of /api/v1/orders")
+    @Description("Basic test for /api/v1/orders")
+    public void checkScooterColourTest() {
 
-    var orderDate = new Order(firstName, lastName, address, metroStation,
+    var orderData = new Order(firstName, lastName, address, metroStation,
             phone, rentTime, deliveryDate, comment, color);
 
-    var order = createOrder(orderDate);
+    var order = createOrder(orderData);
         checkForStatusCode(order, HTTP_CREATED);
         checkCreatedWithTrackNotNull(order);
     }
