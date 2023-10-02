@@ -43,14 +43,18 @@ public class CreateOrderTest {
     public void setUp() {
             RestAssured.baseURI = YANDEX_SCOOTER;
     }
-    @Parameterized.Parameters(name = "Цвет самоката. Тестовые данные: {8} {9}")
+    @Parameterized.Parameters
     public static Object[][] params() {
         return new Object[][]{BLACK_SCOOTER, GRAY_SCOOTER,
                 BLACK_AND_GRAY_SCOOTER, UNDEFINED_COLOUR_SCOOTER,};
     }
     @Test
     public void checkBlackScooterColourTest() {
-    var order = createOrder(params);
+
+    var orderDate = new Order(firstName, lastName, address, metroStation,
+            phone, rentTime, deliveryDate, comment, color);
+
+    var order = createOrder(orderDate);
         checkForStatusCode(order, HTTP_CREATED);
         checkCreatedWithTrackNotNull(order);
     }

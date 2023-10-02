@@ -29,19 +29,19 @@ public class MethodFactory {
         response.statusCode(status)
         ;
     }
-    @Step ("checking creation with \"Ok\" in the response")
+    @Step ("checking the \"Ok\" in the response")
     public static void checkCreatedWithOkTrue(ValidatableResponse response) {
         response.assertThat()
                 .body("ok", is(true))
         ;
     }
-    @Step ("checking creation with not null \"track\" in the response")
+    @Step ("checking the not null \"track\" in the response")
     public static void checkCreatedWithTrackNotNull(ValidatableResponse response) {
         response.assertThat()
                 .body("track", notNullValue())
         ;
     }
-    @Step("checking the \"orders.id\" not null")
+    @Step("checking the not null \"orders.id\" in the response")
     public static void checkOrdersIdNotNull(ValidatableResponse response) {
         response.assertThat()
                 .body("orders[0].id", notNullValue())
@@ -89,10 +89,10 @@ public class MethodFactory {
                 .then().log().all()
                 ;
     }
-    @Step("login a courier")
+    @Step("delete a courier")
     public static ValidatableResponse deleteCourier(Courier courier) {
         int id = getCourierId(Credentials.from(courier));
-        System.out.println(id);
+
         return scope()
                 .body(Map.of("id", valueOf(id)))
                 .when()
@@ -101,9 +101,9 @@ public class MethodFactory {
                 ;
     }
     @Step("create order")
-    public static ValidatableResponse createOrder(Object[] params) {
+    public static ValidatableResponse createOrder(Order order) {
         return scope()
-                .body(params)
+                .body(order)
                 .when()
                 .post(BASIC_HANDLE + ORDERS_HANDLE)
                 .then().log().all()
