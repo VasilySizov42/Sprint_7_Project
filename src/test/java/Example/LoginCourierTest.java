@@ -6,7 +6,7 @@ import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
 
-import static Example.DataForTesting.YANDEX_SCOOTER;
+import static Example.DataForTesting.*;
 import static Example.MethodFactory.*;
 import static java.net.HttpURLConnection.*;
 
@@ -48,7 +48,7 @@ public void setUp() {
         var credentials = loggedInCourier(credentialsData);
 
         checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", "Недостаточно данных для входа");
+        checkParamWithValue(credentials, "message", NOT_ENOUGH_DATA);
 
         courierData.setLogin(name);
         var courierDelete = deleteCourier(courierData);
@@ -69,7 +69,7 @@ public void setUp() {
         var credentials = loggedInCourier(credentialsData);
 
         checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", "Недостаточно данных для входа");
+        checkParamWithValue(credentials, "message", NOT_ENOUGH_DATA);
 
         courierData.setLogin(name);
         var courierDelete = deleteCourier(courierData);
@@ -90,7 +90,7 @@ public void setUp() {
         var credentials = loggedInCourier(credentialsData);
 
         checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", "Недостаточно данных для входа");
+        checkParamWithValue(credentials, "message", NOT_ENOUGH_DATA);
 
         courierData.setPassword(pass);
         var courierDelete = deleteCourier(courierData);
@@ -111,7 +111,7 @@ public void setUp() {
         var credentials = loggedInCourier(credentialsData);
 
         checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", "Недостаточно данных для входа");
+        checkParamWithValue(credentials, "message", NOT_ENOUGH_DATA);
 
         courierData.setPassword(pass);
         var courierDelete = deleteCourier(courierData);
@@ -129,7 +129,7 @@ public void setUp() {
         var credentials = loggedInCourier(credentialsData);
 
         checkForStatusCode(credentials, HTTP_NOT_FOUND);
-        checkParamWithValue(credentials, "message", "Учетная запись не найдена");
+        checkParamWithValue(credentials, "message", ACCOUNT_NOT_FOUND);
     }
     @Test
     @DisplayName("Check login a courier with wrong password")
@@ -142,6 +142,6 @@ public void setUp() {
         var credentials = loggedInCourier(credentialsData);
 
         checkForStatusCode(credentials, HTTP_NOT_FOUND);
-        checkParamWithValue(credentials, "message", "Учетная запись не найдена");
+        checkParamWithValue(credentials, "message", ACCOUNT_NOT_FOUND);
     }
 }
