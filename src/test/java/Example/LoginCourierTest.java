@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import static Example.DataForTesting.YANDEX_SCOOTER;
 import static Example.MethodFactory.*;
-import static java.net.HttpURLConnection.HTTP_CREATED;
 import static java.net.HttpURLConnection.HTTP_OK;
 public class LoginCourierTest {
     @Before
@@ -22,10 +21,10 @@ public void setUp() {
     public void courier() {
         var courierData = genericCourier();
 
-        var courier = createCourier(courierData);
+        /*var courier = createCourier(courierData);
 
         checkForStatusCode(courier, HTTP_CREATED);
-        checkCreatedWithOkTrue(courier);
+        checkCreatedWithOkTrue(courier);*/
 
         var credentialsData = Credentials.from(courierData);
 

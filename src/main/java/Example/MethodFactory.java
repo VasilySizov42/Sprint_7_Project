@@ -25,7 +25,7 @@ public class MethodFactory {
     public static ValidatableResponse getResponseViaGet(String finalHandle) {
         return scope()
                 .get(BASIC_HANDLE + finalHandle)
-                .then().log().all()
+                .then().log().body()
                 ;
     }
     @Step("courier data generation")
@@ -39,7 +39,7 @@ public class MethodFactory {
                 .body(courier)
                 .when()
                 .post(BASIC_HANDLE + COURIER_HANDLE)
-                .then().log().all()
+                .then().log().body()
                 ;
     }
     @Step("login a courier")
@@ -48,7 +48,7 @@ public class MethodFactory {
                 .body(credentials)
                 .when()
                 .post(BASIC_HANDLE + COURIER_HANDLE + LOGIN_HANDLE)
-                .then().log().all()
+                .then().log().body()
                 ;
     }
     @Step("delete a courier")
@@ -59,7 +59,7 @@ public class MethodFactory {
                 .body(Map.of("id", valueOf(id)))
                 .when()
                 .delete(BASIC_HANDLE + COURIER_HANDLE + "/" + id)
-                .then().log().all()
+                .then().log().body()
                 ;
     }
     @Step("create order")
@@ -68,7 +68,7 @@ public class MethodFactory {
                 .body(order)
                 .when()
                 .post(BASIC_HANDLE + ORDERS_HANDLE)
-                .then().log().all()
+                .then().log().body()
                 ;
     }
 
@@ -76,6 +76,18 @@ public class MethodFactory {
     public static void checkForStatusCode(ValidatableResponse response, int status) {
         response.assertThat()
                 .statusCode(status)
+        ;
+    }
+    @Step ("checking the parameter in the response has some value")
+    public static void checkParamWithValue(ValidatableResponse response, String param, Object value) {
+        response.assertThat()
+                .body(param, is(value))
+        ;
+    }
+    @Step ("checking the parameter in the response is not null")
+    public static void checkParamIsNotNull(ValidatableResponse response, String param) {
+        response.assertThat()
+                .body(param, notNullValue())
         ;
     }
     @Step ("checking the \"Ok\" in the response is true")
