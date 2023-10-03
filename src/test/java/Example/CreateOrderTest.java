@@ -21,13 +21,15 @@ public class CreateOrderTest {
     private final String deliveryDate;
     private final String comment;
     private final String[] color;
+    private final String scooterColor;
+
 
 
     public CreateOrderTest(String firstName, String lastName,
                            String address, int metroStation,
                            String phone, int rentTime,
                            String deliveryDate, String comment,
-                           String[] color) {
+                           String[] color, String scooterColor) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -37,9 +39,10 @@ public class CreateOrderTest {
         this.deliveryDate = deliveryDate;
         this.comment = comment;
         this.color = color;
+        this.scooterColor = scooterColor;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Цвет самоката - {9}")
     public static Object[][] params() {
         return new Object[][]{BLACK_SCOOTER, GRAY_SCOOTER,
                 BLACK_AND_GRAY_SCOOTER, UNDEFINED_COLOUR_SCOOTER,};
