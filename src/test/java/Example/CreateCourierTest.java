@@ -38,10 +38,12 @@ public class CreateCourierTest {
         var courierData = genericCourier();
 
         var courier = createCourier(courierData);
-        var courier2 = createCourier(courierData);
 
         checkForStatusCode(courier, HTTP_CREATED);
         checkCreatedWithOkTrue(courier);
+
+        var courier2 = createCourier(courierData);
+
         checkForStatusCode(courier2, HTTP_CONFLICT);
         checkParamWithValue(courier2, "message", ALREADY_IN_USE);
     }
@@ -59,7 +61,7 @@ public class CreateCourierTest {
     @Test
     @DisplayName("Check creating a courier without name")
     @Description("Attempt to create a courier without login name for /api/v1/courier")
-    public void creatingCourierWitBlankName() {
+    public void creatingCourierWithBlankName() {
         var courierData = genericCourier();
         courierData.setLogin("");
         var courier = createCourier(courierData);
@@ -70,7 +72,7 @@ public class CreateCourierTest {
     @Test
     @DisplayName("Check creating a courier without password")
     @Description("Attempt to create a courier without password for /api/v1/courier")
-    public void creatingCourierWitoutPassword() {
+    public void creatingCourierWithoutPassword() {
         var courierData = genericCourier();
         courierData.setPassword(null);
         var courier = createCourier(courierData);
@@ -81,7 +83,7 @@ public class CreateCourierTest {
     @Test
     @DisplayName("Check creating a courier without password")
     @Description("Attempt to create a courier without password for /api/v1/courier")
-    public void creatingCourierWitBlankPassword() {
+    public void creatingCourierWithBlankPassword() {
         var courierData = genericCourier();
         courierData.setPassword("");
         var courier = createCourier(courierData);

@@ -48,7 +48,7 @@ public void setUp() {
         var credentials = loggedInCourier(credentialsData);
 
         checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", NOT_ENOUGH_DATA);
+        checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
 
         courierData.setLogin(name);
         var courierDelete = deleteCourier(courierData);
@@ -69,7 +69,7 @@ public void setUp() {
         var credentials = loggedInCourier(credentialsData);
 
         checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", NOT_ENOUGH_DATA);
+        checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
 
         courierData.setLogin(name);
         var courierDelete = deleteCourier(courierData);
@@ -90,7 +90,7 @@ public void setUp() {
         var credentials = loggedInCourier(credentialsData);
 
         checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", NOT_ENOUGH_DATA);
+        checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
 
         courierData.setPassword(pass);
         var courierDelete = deleteCourier(courierData);
@@ -111,7 +111,7 @@ public void setUp() {
         var credentials = loggedInCourier(credentialsData);
 
         checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", NOT_ENOUGH_DATA);
+        checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
 
         courierData.setPassword(pass);
         var courierDelete = deleteCourier(courierData);

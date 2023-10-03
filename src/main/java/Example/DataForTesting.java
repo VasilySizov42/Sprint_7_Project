@@ -12,4 +12,5 @@ public class DataForTesting {
     public static final String ALREADY_IN_USE = "Этот логин уже используется. Попробуйте другой.";
     public static final String NOT_ENOUGH_DATA = "Недостаточно данных для создания учетной записи";
     public static final String ACCOUNT_NOT_FOUND = "Учетная запись не найдена";
+    public static final String INSUFFICIENT_LOGIN_DATA = "Недостаточно данных для входа";
 }
