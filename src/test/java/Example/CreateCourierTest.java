@@ -6,7 +6,7 @@ import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
 
-import static Example.DataForTesting.YANDEX_SCOOTER;
+import static Example.DataForTesting.*;
 import static Example.MethodFactory.*;
 import static java.net.HttpURLConnection.*;
 
@@ -43,7 +43,7 @@ public class CreateCourierTest {
         checkForStatusCode(courier, HTTP_CREATED);
         checkCreatedWithOkTrue(courier);
         checkForStatusCode(courier2, HTTP_CONFLICT);
-        checkParamWithValue(courier2, "message", "Этот логин уже используется. Попробуйте другой.");
+        checkParamWithValue(courier2, "message", ALREADY_IN_USE);
     }
     @Test
     @DisplayName("Check creating a courier without name")
@@ -54,7 +54,7 @@ public class CreateCourierTest {
         var courier = createCourier(courierData);
 
         checkForStatusCode(courier, HTTP_BAD_REQUEST);
-        checkParamWithValue(courier, "message", "Недостаточно данных для создания учетной записи");
+        checkParamWithValue(courier, "message", NOT_ENOUGH_DATA);
     }
     @Test
     @DisplayName("Check creating a courier without name")
@@ -65,7 +65,7 @@ public class CreateCourierTest {
         var courier = createCourier(courierData);
 
         checkForStatusCode(courier, HTTP_BAD_REQUEST);
-        checkParamWithValue(courier, "message", "Недостаточно данных для создания учетной записи");
+        checkParamWithValue(courier, "message", NOT_ENOUGH_DATA);
     }
     @Test
     @DisplayName("Check creating a courier without password")
@@ -76,7 +76,7 @@ public class CreateCourierTest {
         var courier = createCourier(courierData);
 
         checkForStatusCode(courier, HTTP_BAD_REQUEST);
-        checkParamWithValue(courier, "message", "Недостаточно данных для создания учетной записи");
+        checkParamWithValue(courier, "message", NOT_ENOUGH_DATA);
     }
     @Test
     @DisplayName("Check creating a courier without password")
@@ -87,6 +87,6 @@ public class CreateCourierTest {
         var courier = createCourier(courierData);
 
         checkForStatusCode(courier, HTTP_BAD_REQUEST);
-        checkParamWithValue(courier, "message", "Недостаточно данных для создания учетной записи");
+        checkParamWithValue(courier, "message", NOT_ENOUGH_DATA);
     }
 }
