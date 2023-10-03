@@ -2,23 +2,18 @@ package Example;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
-import org.junit.Before;
 import org.junit.Test;
 
-import static Example.DataForTesting.*;
+import static Example.DataForTesting.ACCOUNT_NOT_FOUND;
+import static Example.DataForTesting.INSUFFICIENT_LOGIN_DATA;
 import static Example.MethodFactory.*;
 import static java.net.HttpURLConnection.*;
 
 public class LoginCourierTest {
-    @Before
-public void setUp() {
-    RestAssured.baseURI = YANDEX_SCOOTER;
-}
 
     @Test
     @DisplayName("Check login a courier with random name")
-    @Description("Basic test for /api/v1/courier/login")
+    @Description("Attempt to login a courier with random name for /api/v1/courier/login")
     public void loginCourierWithRandomName() {
         var courierData = genericCourier();
         createCourier(courierData);

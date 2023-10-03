@@ -2,19 +2,14 @@ package Example;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
-import org.junit.Before;
 import org.junit.Test;
 
-import static Example.DataForTesting.*;
+import static Example.DataForTesting.ALREADY_IN_USE;
+import static Example.DataForTesting.NOT_ENOUGH_DATA;
 import static Example.MethodFactory.*;
 import static java.net.HttpURLConnection.*;
 
 public class CreateCourierTest {
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = YANDEX_SCOOTER;
-    }
 
     @Test
     @DisplayName("Check creating a courier with random name")

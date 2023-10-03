@@ -2,14 +2,11 @@ package Example;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import static Example.DataForParametrization.*;
-import static Example.DataForTesting.YANDEX_SCOOTER;
 import static Example.MethodFactory.*;
 import static java.net.HttpURLConnection.HTTP_CREATED;
 
@@ -42,18 +39,14 @@ public class CreateOrderTest {
         this.color = color;
     }
 
-    @Before
-    public void setUp() {
-            RestAssured.baseURI = YANDEX_SCOOTER;
-    }
     @Parameterized.Parameters
     public static Object[][] params() {
         return new Object[][]{BLACK_SCOOTER, GRAY_SCOOTER,
                 BLACK_AND_GRAY_SCOOTER, UNDEFINED_COLOUR_SCOOTER,};
     }
     @Test
-    @DisplayName("Check order list without CourierId of /api/v1/orders")
-    @Description("Basic test for /api/v1/orders")
+    @DisplayName("Create order test")
+    @Description("Checking the possibility of creating an order for /api/v1/orders")
     public void checkScooterColourTest() {
 
     var orderData = new Order(firstName, lastName, address, metroStation,
