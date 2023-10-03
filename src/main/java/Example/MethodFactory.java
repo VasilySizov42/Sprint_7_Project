@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 
 public class MethodFactory {
     public static RequestSpecification scope() {
-        return  given().log().all()
+        return  given().log().method()
                 .contentType(ContentType.JSON)
                 .baseUri(YANDEX_SCOOTER)
                 ;
