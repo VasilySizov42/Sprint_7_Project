@@ -1,13 +1,16 @@
 package example;
 
+import example.methods.CheckinOther;
+import example.methods.CheckingResponseForCourier;
+import example.methods.SendingRequestsForCourier;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static example.BaseURLHandlesAndWarnings.ALREADY_IN_USE;
-import static example.BaseURLHandlesAndWarnings.NOT_ENOUGH_DATA;
+import static example.constants.BaseURLHandlesAndWarnings.ALREADY_IN_USE;
+import static example.constants.BaseURLHandlesAndWarnings.NOT_ENOUGH_DATA;
 import static java.net.HttpURLConnection.*;
 
 public class CreateCourierTest {

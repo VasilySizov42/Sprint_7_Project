@@ -1,10 +1,11 @@
-package example;
+package example.methods;
 
+import example.Order;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 
-import static example.BaseURLHandlesAndWarnings.BASIC_HANDLE;
-import static example.BaseURLHandlesAndWarnings.ORDERS_HANDLE;
+import static example.constants.BaseURLHandlesAndWarnings.BASIC_HANDLE;
+import static example.constants.BaseURLHandlesAndWarnings.ORDERS_HANDLE;
 
 public class SendingRequestsForOrder {
     @Step("create order")

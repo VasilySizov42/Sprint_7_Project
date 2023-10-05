@@ -1,12 +1,14 @@
-package example;
+package example.methods;
 
+import example.Courier;
+import example.Credentials;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Map;
 
-import static example.BaseURLHandlesAndWarnings.*;
+import static example.constants.BaseURLHandlesAndWarnings.*;
 import static java.lang.String.valueOf;
 public class SendingRequestsForCourier {
     @Step("creating a new courier")

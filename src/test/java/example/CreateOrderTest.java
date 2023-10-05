@@ -1,12 +1,15 @@
 package example;
 
+import example.methods.CheckinOther;
+import example.methods.CheckingResponseForOrder;
+import example.methods.SendingRequestsForOrder;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static example.DataForParametrization.*;
+import static example.constants.DataForParametrization.*;
 import static java.net.HttpURLConnection.HTTP_CREATED;
 
 @RunWith(Parameterized.class)

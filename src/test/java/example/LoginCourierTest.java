@@ -1,13 +1,16 @@
 package example;
 
+import example.methods.CheckinOther;
+import example.methods.CheckingResponseForCourier;
+import example.methods.SendingRequestsForCourier;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static example.BaseURLHandlesAndWarnings.ACCOUNT_NOT_FOUND;
-import static example.BaseURLHandlesAndWarnings.INSUFFICIENT_LOGIN_DATA;
+import static example.constants.BaseURLHandlesAndWarnings.ACCOUNT_NOT_FOUND;
+import static example.constants.BaseURLHandlesAndWarnings.INSUFFICIENT_LOGIN_DATA;
 import static java.net.HttpURLConnection.*;
 
 public class LoginCourierTest {

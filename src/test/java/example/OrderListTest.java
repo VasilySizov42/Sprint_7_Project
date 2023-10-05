@@ -1,11 +1,13 @@
 package example;
 
+import example.methods.CheckinOther;
+import example.methods.CheckingResponseForOrder;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 
-import static example.BaseURLHandlesAndWarnings.ORDERS_HANDLE;
-import static example.OtherRequests.*;
+import static example.constants.BaseURLHandlesAndWarnings.ORDERS_HANDLE;
+import static example.methods.OtherRequests.*;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 public class OrderListTest {
