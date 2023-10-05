@@ -1,4 +1,4 @@
-package Example;
+package example;
 
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
@@ -8,7 +8,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Map;
 
-import static Example.DataForTesting.*;
+import static example.DataForTesting.*;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.valueOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -96,13 +96,13 @@ public class MethodFactory {
                 .body("ok", is(true))
         ;
     }
-    @Step ("checking the not null \"track\" in the response is not null")
+    @Step ("checking the \"track\" in the response is not null")
     public static void checkCreatedWithTrackNotNull(ValidatableResponse response) {
         response.assertThat()
                 .body("track", notNullValue())
         ;
     }
-    @Step("checking the not null \"orders.id\" in the response is not null")
+    @Step("checking the \"orders.id\" in the response is not null")
     public static void checkOrdersIdNotNull(ValidatableResponse response) {
         response.assertThat()
                 .body("orders[0].id", notNullValue())
@@ -119,5 +119,4 @@ public class MethodFactory {
                 .path("id")
                 ;
     }
-
 }

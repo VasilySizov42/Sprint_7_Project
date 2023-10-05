@@ -1,4 +1,4 @@
-package Example;
+package example;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static Example.DataForParametrization.*;
-import static Example.MethodFactory.*;
+import static example.DataForParametrization.*;
+import static example.MethodFactory.*;
 import static java.net.HttpURLConnection.HTTP_CREATED;
 
 @RunWith(Parameterized.class)

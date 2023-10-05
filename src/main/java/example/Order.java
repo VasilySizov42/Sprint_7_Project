@@ -1,4 +1,4 @@
-package Example;
+package example;
 
 public class Order {
     private  String firstName;

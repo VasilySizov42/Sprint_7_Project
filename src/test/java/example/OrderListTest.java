@@ -1,11 +1,11 @@
-package Example;
+package example;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 
-import static Example.DataForTesting.ORDERS_HANDLE;
-import static Example.MethodFactory.*;
+import static example.DataForTesting.ORDERS_HANDLE;
+import static example.MethodFactory.*;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 public class OrderListTest {

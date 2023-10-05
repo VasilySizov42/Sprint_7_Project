@@ -1,4 +1,4 @@
-package Example;
+package example;
 
 public class DataForParametrization {
     private static final String[] BLACK = {"BLACK"};
