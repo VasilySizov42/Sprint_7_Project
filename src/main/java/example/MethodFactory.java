@@ -8,7 +8,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Map;
 
-import static example.DataForTesting.*;
+import static example.BaseURLHandlesAndWarnings.*;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.valueOf;
 import static org.hamcrest.CoreMatchers.notNullValue;

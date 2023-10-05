@@ -4,7 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 
-import static example.DataForTesting.ORDERS_HANDLE;
+import static example.BaseURLHandlesAndWarnings.ORDERS_HANDLE;
 import static example.MethodFactory.*;
 import static java.net.HttpURLConnection.HTTP_OK;
 

@@ -1,7 +1,7 @@
 package example;
 
 
-public class DataForTesting {
+public class BaseURLHandlesAndWarnings {
     //Handles
     public static final String YANDEX_SCOOTER = "https://qa-scooter.praktikum-services.ru";
     public static final String BASIC_HANDLE = "/api/v1/";

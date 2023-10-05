@@ -4,8 +4,8 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 
-import static example.DataForTesting.ACCOUNT_NOT_FOUND;
-import static example.DataForTesting.INSUFFICIENT_LOGIN_DATA;
+import static example.BaseURLHandlesAndWarnings.ACCOUNT_NOT_FOUND;
+import static example.BaseURLHandlesAndWarnings.INSUFFICIENT_LOGIN_DATA;
 import static example.MethodFactory.*;
 import static java.net.HttpURLConnection.*;
 

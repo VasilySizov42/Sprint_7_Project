@@ -4,8 +4,8 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 
-import static example.DataForTesting.ALREADY_IN_USE;
-import static example.DataForTesting.NOT_ENOUGH_DATA;
+import static example.BaseURLHandlesAndWarnings.ALREADY_IN_USE;
+import static example.BaseURLHandlesAndWarnings.NOT_ENOUGH_DATA;
 import static example.MethodFactory.*;
 import static java.net.HttpURLConnection.*;
 
