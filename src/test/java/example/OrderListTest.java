@@ -5,7 +5,7 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 
 import static example.BaseURLHandlesAndWarnings.ORDERS_HANDLE;
-import static example.MethodFactory.*;
+import static example.OtherRequests.*;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 public class OrderListTest {
@@ -17,7 +17,7 @@ public class OrderListTest {
 
         var requestOrderList = getResponseViaGet(ORDERS_HANDLE);
 
-        checkForStatusCode(requestOrderList, HTTP_OK);
-        checkOrdersIdNotNull(requestOrderList);
+        CheckinOther.checkForStatusCode(requestOrderList, HTTP_OK);
+        CheckingResponseForOrder.checkOrdersIdNotNull(requestOrderList);
     }
 }

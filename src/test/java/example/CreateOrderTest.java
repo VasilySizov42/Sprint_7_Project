@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import static example.DataForParametrization.*;
-import static example.MethodFactory.*;
 import static java.net.HttpURLConnection.HTTP_CREATED;
 
 @RunWith(Parameterized.class)
@@ -55,8 +54,8 @@ public class CreateOrderTest {
     var orderData = new Order(firstName, lastName, address, metroStation,
             phone, rentTime, deliveryDate, comment, color);
 
-    var order = createOrder(orderData);
-        checkForStatusCode(order, HTTP_CREATED);
-        checkCreatedWithTrackNotNull(order);
+    var order = SendingRequestsForOrder.createOrder(orderData);
+        CheckinOther.checkForStatusCode(order, HTTP_CREATED);
+        CheckingResponseForOrder.checkCreatedWithTrackNotNull(order);
     }
 }

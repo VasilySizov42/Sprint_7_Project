@@ -8,42 +8,41 @@ import org.junit.Test;
 
 import static example.BaseURLHandlesAndWarnings.ACCOUNT_NOT_FOUND;
 import static example.BaseURLHandlesAndWarnings.INSUFFICIENT_LOGIN_DATA;
-import static example.MethodFactory.*;
 import static java.net.HttpURLConnection.*;
 
 public class LoginCourierTest {
     Courier courierData;
     @Before
     public void createNewCourierData() {
-        courierData = genericCourier();
+        courierData = SendingRequestsForCourier.genericCourier();
     }
     @Test
     @DisplayName("Check login a courier with random name")
     @Description("Attempt to login a courier with random name for /api/v1/courier/login")
     public void loginCourierWithRandomName() {
-        createCourier(courierData);
+        SendingRequestsForCourier.createCourier(courierData);
 
         var credentialsData = Credentials.from(courierData);
 
-        var credentials = loggedInCourier(credentialsData);
+        var credentials = SendingRequestsForCourier.loggedInCourier(credentialsData);
 
-        checkForStatusCode(credentials, HTTP_OK);
-        checkLoggedInWithNotNullId(credentials);
+        CheckinOther.checkForStatusCode(credentials, HTTP_OK);
+        CheckingResponseForCourier.checkLoggedInWithNotNullId(credentials);
     }
     @Test
     @DisplayName("Check login a courier without name")
     @Description("Attempt to login a courier without login name for /api/v1/courier/login")
     public void loginCourierWithoutName() {
-        createCourier(courierData);
+        SendingRequestsForCourier.createCourier(courierData);
         var name = courierData.getLogin();
         courierData.setLogin(null);
 
         var credentialsData = Credentials.from(courierData);
 
-        var credentials = loggedInCourier(credentialsData);
+        var credentials = SendingRequestsForCourier.loggedInCourier(credentialsData);
 
-        checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
+        CheckinOther.checkForStatusCode(credentials, HTTP_BAD_REQUEST);
+        CheckinOther.checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
 
         courierData.setLogin(name);
     }
@@ -52,15 +51,15 @@ public class LoginCourierTest {
     @Description("Attempt to login a courier with blank login name for /api/v1/courier/login")
     public void loginCourierWithBlankName() {
         var name = courierData.getLogin();
-        createCourier(courierData);
+        SendingRequestsForCourier.createCourier(courierData);
         courierData.setLogin("");
 
         var credentialsData = Credentials.from(courierData);
 
-        var credentials = loggedInCourier(credentialsData);
+        var credentials = SendingRequestsForCourier.loggedInCourier(credentialsData);
 
-        checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
+        CheckinOther.checkForStatusCode(credentials, HTTP_BAD_REQUEST);
+        CheckinOther.checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
 
         courierData.setLogin(name);
     }
@@ -68,16 +67,16 @@ public class LoginCourierTest {
     @DisplayName("Check login a courier without password")
     @Description("Attempt to login a courier without password for /api/v1/courier/login")
     public void loginCourierWithoutPassword() {
-        createCourier(courierData);
+        SendingRequestsForCourier.createCourier(courierData);
         var pass = courierData.getPassword();
         courierData.setPassword(null);
 
         var credentialsData = Credentials.from(courierData);
 
-        var credentials = loggedInCourier(credentialsData);
+        var credentials = SendingRequestsForCourier.loggedInCourier(credentialsData);
 
-        checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
+        CheckinOther.checkForStatusCode(credentials, HTTP_BAD_REQUEST);
+        CheckinOther.checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
 
         courierData.setPassword(pass);
     }
@@ -85,16 +84,16 @@ public class LoginCourierTest {
     @DisplayName("Check login a courier with blank password")
     @Description("Attempt to login a courier with blank password for /api/v1/courier/login")
     public void loginCourierWithBlankPassword() {
-        createCourier(courierData);
+        SendingRequestsForCourier.createCourier(courierData);
         var pass = courierData.getPassword();
         courierData.setPassword("");
 
         var credentialsData = Credentials.from(courierData);
 
-        var credentials = loggedInCourier(credentialsData);
+        var credentials = SendingRequestsForCourier.loggedInCourier(credentialsData);
 
-        checkForStatusCode(credentials, HTTP_BAD_REQUEST);
-        checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
+        CheckinOther.checkForStatusCode(credentials, HTTP_BAD_REQUEST);
+        CheckinOther.checkParamWithValue(credentials, "message", INSUFFICIENT_LOGIN_DATA);
 
         courierData.setPassword(pass);
     }
@@ -104,10 +103,10 @@ public class LoginCourierTest {
     public void loginCourierWithWrongName() {
         var credentialsData = Credentials.from(courierData);
 
-        var credentials = loggedInCourier(credentialsData);
+        var credentials = SendingRequestsForCourier.loggedInCourier(credentialsData);
 
-        checkForStatusCode(credentials, HTTP_NOT_FOUND);
-        checkParamWithValue(credentials, "message", ACCOUNT_NOT_FOUND);
+        CheckinOther.checkForStatusCode(credentials, HTTP_NOT_FOUND);
+        CheckinOther.checkParamWithValue(credentials, "message", ACCOUNT_NOT_FOUND);
     }
     @Test
     @DisplayName("Check login a courier with wrong password")
@@ -115,17 +114,17 @@ public class LoginCourierTest {
     public void loginCourierWithWrongPassword() {
         var credentialsData = Credentials.from(courierData);
 
-        var credentials = loggedInCourier(credentialsData);
+        var credentials = SendingRequestsForCourier.loggedInCourier(credentialsData);
 
-        checkForStatusCode(credentials, HTTP_NOT_FOUND);
-        checkParamWithValue(credentials, "message", ACCOUNT_NOT_FOUND);
+        CheckinOther.checkForStatusCode(credentials, HTTP_NOT_FOUND);
+        CheckinOther.checkParamWithValue(credentials, "message", ACCOUNT_NOT_FOUND);
     }
     @After
     public void deleteCreatedCourier() {
         try {
-            var courierDelete = deleteCourier(courierData);
-            checkForStatusCode(courierDelete, HTTP_OK);
-            checkCreatedWithOkTrue(courierDelete);
+            var courierDelete = SendingRequestsForCourier.deleteCourier(courierData);
+            CheckinOther.checkForStatusCode(courierDelete, HTTP_OK);
+            CheckingResponseForCourier.checkCreatedWithOkTrue(courierDelete);
         }
         catch (Exception e){
             System.out.println("Курьер не был создан. Проверьте данные.");
